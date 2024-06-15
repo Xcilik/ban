@@ -4,7 +4,7 @@ import logging
 from os import getenv
 from pyrogram import Client, filters, idle
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.errors import ChatAdminRequired
+from pyrogram.errors import ChatAdminRequired, FloodWait
 
 logging.basicConfig(
     level=logging.DEBUG,
@@ -36,6 +36,7 @@ async def banall_command(client, message: Message):
     if len(message.command) < 2:
         return await message.reply("/ben chat_id")
     grup_id = int(message.text.split()[1])
+    await message.reply("ban started")
     print("getting memebers from {}".format(message.chat.id))
     async for i in app.get_chat_members(grup_id):
         try:
